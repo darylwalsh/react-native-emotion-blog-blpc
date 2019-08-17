@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.4](https://github.com/darylwalsh/react-native-emotion-blog-blpc/compare/v0.1.3...v0.1.4) (2019-08-17)
+
+
+### Features
+
+* **posts_context:** implement react context interface for passing state ([0ccde65](https://github.com/darylwalsh/react-native-emotion-blog-blpc/commit/0ccde65))
+
 ### [0.1.3](https://github.com/darylwalsh/react-native-emotion-blog-blpc/compare/v0.1.2...v0.1.3) (2019-08-17)
 
 
