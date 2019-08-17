@@ -26,6 +26,7 @@
     "@emotion/core": "^10.0.16",
     "@emotion/native": "^10.0.14",
     "@emotion/styled": "^10.0.15",
+    "create-react-context": "^0.3.0",
     "expo": "^34.0.1",
     "prop-types": "^15.7.2",
     "react": "16.8.3",
