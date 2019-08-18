@@ -26,11 +26,11 @@ export const initialState: StateInterface = {
   // },
 }
 
-const BlogContext = createContext<StateInterface | any>(initialState)
-interface ChildrenInterface {
-  children?: ReactNode
-  //   value?: any
-}
+// const BlogContext = createContext<StateInterface | any>(initialState)
+// interface ChildrenInterface {
+// children?: ReactNode
+//   value?: any
+// }
 interface ActionType {
   type: 'addBlogPost' | 'decrement'
   payload: number
@@ -51,7 +51,7 @@ const blogReducer = (
       return state
   }
 }
-const addBlogPost = (state: any) => {
+const addBlogPost = (dispatch: React.Dispatch) => {
   dispatch({ type: 'addBlogPost' })
 }
 

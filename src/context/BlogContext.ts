@@ -1,12 +1,14 @@
 import createDataContext from './createDataContext'
 
 export interface PostsInterface {
+  id: number
   title: string
   length: number
 }
 
 interface StateInterface {
   title?: string
+  filter: Function
   length: number
   data?: PostsInterface[]
   [Symbol.iterator]?: any
@@ -16,6 +18,7 @@ export const initialState: StateInterface = {
   // blogPosts: { title: 'Default Post', length: 1 },
   data: [],
   length: 1,
+  filter: Function,
   // [Symbol.iterator]: function*() {
   //   const properties = Object.keys(this)
   //   for (const i of properties) {
@@ -38,8 +41,18 @@ const blogReducer = (
   action: ActionType
 ): StateInterface => {
   switch (action.type) {
+    case 'deleteBlogPost':
+      return state.filter(
+        (blogPost: PostsInterface) => blogPost.id !== action.payload
+      )
     case 'addBlogPost':
-      return [...state, { title: `Blog Post #${state.length + 1}` }]
+      return [
+        ...state,
+        {
+          id: Math.floor(Math.random() * 99999),
+          title: `Blog Post #${state.length + 1}`,
+        },
+      ]
     default:
       return state
   }
@@ -49,10 +62,15 @@ const addBlogPost = (dispatch: React.Dispatch<any>) => {
     dispatch({ type: 'addBlogPost' })
   }
 }
+const deleteBlogPost = (dispatch: React.Dispatch<any>) => {
+  return (id: number) => {
+    dispatch({ type: 'deleteBlogPost', payload: id })
+  }
+}
 
 export const { Context, Provider } = createDataContext(
   blogReducer,
-  { addBlogPost },
+  { addBlogPost, deleteBlogPost },
   []
 )
 
