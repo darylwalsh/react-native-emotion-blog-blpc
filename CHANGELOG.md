@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.5](https://github.com/darylwalsh/react-native-emotion-blog-blpc/compare/v0.1.4...v0.1.5) (2019-08-18)
+
+
+### Features
+
+* **global_state:** implement redux style global state handler ([133c6c1](https://github.com/darylwalsh/react-native-emotion-blog-blpc/commit/133c6c1))
+
 ### [0.1.4](https://github.com/darylwalsh/react-native-emotion-blog-blpc/compare/v0.1.3...v0.1.4) (2019-08-17)
 
 
