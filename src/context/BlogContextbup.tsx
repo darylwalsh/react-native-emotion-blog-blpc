@@ -1,29 +1,20 @@
 import React, { createContext, FC, ReactNode, useReducer } from 'react'
 
-import createDataContext from './createDataContext'
-
 export interface PostsInterface {
   title: string
   length: number
 }
 
 interface StateInterface {
-  title?: string
+  blogPosts: any
   length: number
   data?: PostsInterface[]
-  [Symbol.iterator]?: any
 }
 
 export const initialState: StateInterface = {
-  // blogPosts: { title: 'Default Post', length: 1 },
+  blogPosts: { title: 'Default Post', length: 1 },
   data: [],
   length: 1,
-  // [Symbol.iterator]: function*() {
-  //   const properties = Object.keys(this)
-  //   for (const i of properties) {
-  //     yield [i, this[i]]
-  //   }
-  // },
 }
 
 const BlogContext = createContext<StateInterface | any>(initialState)
@@ -46,21 +37,37 @@ const blogReducer = (
 ): StateInterface => {
   switch (action.type) {
     case 'addBlogPost':
-      return [...state, { title: `Blog Post #${state.length + 1}` }]
+      return {
+        ...state,
+        blogPosts: [
+          {
+            ...state.blogPosts,
+            ...{ title: `Blog Post #${state.length + 1}` },
+          },
+        ],
+      }
     default:
       return state
   }
 }
-const addBlogPost = (state: any) => {
-  dispatch({ type: 'addBlogPost' })
+
+export const BlogProvider: FC<ChildrenInterface> = ({ children }) => {
+  const [blogPosts, dispatch] = useReducer<StateInterface | any>(
+    blogReducer,
+    []
+  )
+
+  const addBlogPost = (state: any) => {
+    dispatch({ type: 'addBlogPost' })
+  }
+  return (
+    <BlogContext.Provider value={{ data: blogPosts, addBlogPost }}>
+      {children}
+    </BlogContext.Provider>
+  )
 }
 
-export const { Context, Provider } = createDataContext(
-  blogReducer,
-  { addBlogPost },
-  []
-)
-
+export default BlogContext
 // example using create-react-context from npm registry
 
 // import createReactContext from 'create-react-context'

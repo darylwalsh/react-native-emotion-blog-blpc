@@ -1,5 +1,3 @@
-import React, { createContext, FC, ReactNode, useReducer } from 'react'
-
 import createDataContext from './createDataContext'
 
 export interface PostsInterface {
@@ -26,14 +24,9 @@ export const initialState: StateInterface = {
   // },
 }
 
-const BlogContext = createContext<StateInterface | any>(initialState)
-interface ChildrenInterface {
-  children?: ReactNode
-  //   value?: any
-}
 interface ActionType {
-  type: 'addBlogPost' | 'decrement'
-  payload: number
+  type: any
+  payload: any
 }
 // export const blogState: StateInterface = {
 //   activeEntity: { id: 1, name: 'John Doe' },
@@ -51,8 +44,10 @@ const blogReducer = (
       return state
   }
 }
-const addBlogPost = (state: any) => {
-  dispatch({ type: 'addBlogPost' })
+const addBlogPost = (dispatch: React.Dispatch<any>) => {
+  return () => {
+    dispatch({ type: 'addBlogPost' })
+  }
 }
 
 export const { Context, Provider } = createDataContext(

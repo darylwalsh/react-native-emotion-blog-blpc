@@ -25,10 +25,11 @@
     "jsx": "react-native",
     // Library files to be used in the project.
     // Tells the compiler that "DOM-APIs" and new ECMAScript features are valid.
-    "lib": ["dom", "es2018"],
+    "lib": ["es5", "es6", "dom", "dom.iterable", "es2018"],
     // Module aliases (if you use module aliases in webpack)
     "skipLibCheck": true,
     "resolveJsonModule": true,
+    "downlevelIteration": true,
     "types": ["react", "react-native", "node"]
   },
   "include": ["src"],

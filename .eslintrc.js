@@ -20,11 +20,13 @@ module.exports = {
     'react/jsx-filename-extension': [2, { extensions: ['.tsx', '.ts'] }],
     // use custom non-unused-vars for typescript
     'no-unused-vars': 'off',
+    //'prefer-const': 'off',
     '@typescript-eslint/no-unused-vars': 'off',
     'import/no-extraneous-dependencies': 'off',
     'import/no-unresolved': 'off',
     'semi': 'off',
     '@typescript-eslint/semi': ['error','never'],
+    '@typescript-eslint/prefer-const': 'off',
     '@typescript-eslint/no-duplicate-imports': 'off',
     '@typescript-eslint/no-var-requires': 'off',
     '@typescript-eslint/no-use-before-define': 'off',
