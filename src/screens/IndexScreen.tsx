@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { FC, ReactPropTypes, useContext } from 'react'
 import {
   Button,
   FlatList,
@@ -7,13 +7,23 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native'
+import {
+  NavigationParams,
+  NavigationScreenProp,
+  NavigationState,
+} from 'react-navigation'
 
 import { Feather } from '@expo/vector-icons'
 
 import { Context, PostsInterface } from '../context/BlogContext'
 
-const IndexScreen = () => {
+interface Props {
+  navigation: NavigationScreenProp<NavigationState, NavigationParams>
+}
+
+const IndexScreen: FC<Props> = ({ navigation }) => {
   const { state, addBlogPost, deleteBlogPost } = useContext(Context)
+  console.log(state)
   return (
     <View>
       <Button title="add post" onPress={addBlogPost} />
@@ -22,14 +32,18 @@ const IndexScreen = () => {
         keyExtractor={(blogPost: PostsInterface) => blogPost.title}
         renderItem={({ item }) => {
           return (
-            <View style={styles.row}>
-              <Text style={styles.title}>
-                {item.title} - {item.id}
-              </Text>
-              <TouchableOpacity onPress={() => deleteBlogPost(item.id)}>
-                <Feather style={styles.icon} name="trash-2" />
-              </TouchableOpacity>
-            </View>
+            <TouchableOpacity
+              onPress={() => navigation.navigate('Show', { id: item.id })}
+            >
+              <View style={styles.row}>
+                <Text style={styles.title}>
+                  {item.title} - {item.id}
+                </Text>
+                <TouchableOpacity onPress={() => deleteBlogPost(item.id)}>
+                  <Feather style={styles.icon} name="trash-2" />
+                </TouchableOpacity>
+              </View>
+            </TouchableOpacity>
           )
         }}
       />

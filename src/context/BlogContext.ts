@@ -4,9 +4,10 @@ export interface PostsInterface {
   id: number
   title: string
   length: number
+  getParam: (text: string) => void
 }
 
-interface StateInterface {
+export interface StateInterface {
   title?: string
   filter: Function
   length: number
