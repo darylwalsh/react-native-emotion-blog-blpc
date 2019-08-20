@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.7](https://github.com/darylwalsh/react-native-emotion-blog-blpc/compare/v0.1.6...v0.1.7) (2019-08-20)
+
+
+### Features
+
+* **show_screen:** add screen to show individual post ([3e5f8e2](https://github.com/darylwalsh/react-native-emotion-blog-blpc/commit/3e5f8e2))
+
 ### [0.1.6](https://github.com/darylwalsh/react-native-emotion-blog-blpc/compare/v0.1.5...v0.1.6) (2019-08-18)
 
 
