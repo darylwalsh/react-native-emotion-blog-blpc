@@ -1,4 +1,4 @@
-import React, { FC, ReactPropTypes, useContext } from 'react'
+import React, { FC, useContext } from 'react'
 import {
   Button,
   FlatList,
@@ -9,7 +9,12 @@ import {
 } from 'react-native'
 import {
   NavigationParams,
+  NavigationScreenComponent,
+  NavigationScreenConfig,
+  NavigationScreenConfigProps,
   NavigationScreenProp,
+  NavigationScreenProps,
+  NavigationStackScreenOptions,
   NavigationState,
 } from 'react-navigation'
 
@@ -19,14 +24,20 @@ import { Context, PostsInterface } from '../context/BlogContext'
 
 interface Props {
   navigation: NavigationScreenProp<NavigationState, NavigationParams>
+  // navigation: NavigationScreenProp<
+  // NavigationParams,
+  // NavigationScreenConfigProps
+  // >
+  navigationOptions: NavigationScreenConfig<NavigationStackScreenOptions>
+  // navigationOptions: NavigationStackScreenOptions
+  // navigationOptions: Record<string, any>
 }
 
-const IndexScreen: FC<Props> = ({ navigation }) => {
-  const { state, addBlogPost, deleteBlogPost } = useContext(Context)
-  console.log(state)
+const IndexScreen: NavigationScreenComponent<Props> = ({ navigation }) => {
+  const { state, deleteBlogPost } = useContext(Context)
+
   return (
     <View>
-      <Button title="add post" onPress={addBlogPost} />
       <FlatList
         data={state}
         keyExtractor={(blogPost: PostsInterface) => blogPost.title}
@@ -49,6 +60,18 @@ const IndexScreen: FC<Props> = ({ navigation }) => {
       />
     </View>
   )
+}
+
+IndexScreen.navigationOptions = ({
+  navigation,
+}: NavigationScreenProps<Props>) => {
+  return {
+    headerRight: (
+      <TouchableOpacity onPress={() => navigation.navigate('Create')}>
+        <Feather name="plus" size={30} />
+      </TouchableOpacity>
+    ),
+  }
 }
 
 const styles = StyleSheet.create({

@@ -31,20 +31,20 @@ interface Props {
 const ShowScreen: FC<Props> = ({ navigation }) => {
   const { state } = useContext(Context)
   const paramId = navigation.getParam('id')
-  console.log('paramId here:')
-  console.log(paramId)
-  console.log('breaking break')
-  console.log(navigation)
-  console.log('breaking break')
-  console.log(state)
+  // console.log('paramId here:')
+  // console.log(paramId)
+  // console.log('breaking break')
+  // console.log(navigation)
+  // console.log('breaking break')
+  // console.log(state)
   const blogPost = state.find(
     (blogPost: PostsInterface) => blogPost.id === navigation.getParam('id')
   )
-  console.log('BlogPost')
-  console.log({ blogPost })
-  console.log('breaking bllog break')
+  // console.log('BlogPost')
+  // console.log({ blogPost })
+  // console.log('breaking bllog break')
   //console.log({blogPost.id})
-  console.log('breaking bllog break')
+  // console.log('breaking bllog break')
   return (
     <View>
       <Text>{blogPost.title}</Text>

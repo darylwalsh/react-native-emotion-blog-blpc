@@ -3,14 +3,18 @@ import createDataContext from './createDataContext'
 export interface PostsInterface {
   id: number
   title: string
+  content: string
   length: number
+  callback: () => void
   getParam: (text: string) => void
 }
 
 export interface StateInterface {
   title?: string
+  content?: string
   filter: Function
   length: number
+  callback?: () => void
   data?: PostsInterface[]
   [Symbol.iterator]?: any
 }
@@ -51,7 +55,8 @@ const blogReducer = (
         ...state,
         {
           id: Math.floor(Math.random() * 99999),
-          title: `Blog Post #${state.length + 1}`,
+          title: action.payload.title,
+          content: action.payload.content,
         },
       ]
     default:
@@ -59,8 +64,9 @@ const blogReducer = (
   }
 }
 const addBlogPost = (dispatch: React.Dispatch<any>) => {
-  return () => {
-    dispatch({ type: 'addBlogPost' })
+  return (title: string, content: string, callback: Function) => {
+    dispatch({ type: 'addBlogPost', payload: { title, content } })
+    callback()
   }
 }
 const deleteBlogPost = (dispatch: React.Dispatch<any>) => {
