@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.8](https://github.com/darylwalsh/react-native-emotion-blog-blpc/compare/v0.1.7...v0.1.8) (2019-08-23)
+
+
+### Features
+
+* **create_post:** added form logic and view screen to add a post ([aaed38f](https://github.com/darylwalsh/react-native-emotion-blog-blpc/commit/aaed38f))
+* **crud_complete:** complete add/edit/delete functionality ([28e50ce](https://github.com/darylwalsh/react-native-emotion-blog-blpc/commit/28e50ce))
+
 ### [0.1.7](https://github.com/darylwalsh/react-native-emotion-blog-blpc/compare/v0.1.6...v0.1.7) (2019-08-20)
 
 
