@@ -1,6 +1,9 @@
-import createDataContext from './createDataContext'
+import React, { FC } from 'react'
 
-export interface PostsInterface {
+import createDataContext from './createDataContext'
+import BlogPostForm from 'src/components/BlogPostForm'
+
+export interface PostsInterface extends FC {
   id: number
   title: string
   content: string
@@ -10,9 +13,11 @@ export interface PostsInterface {
 }
 
 export interface StateInterface {
+  id?: number
   title?: string
   content?: string
   filter: Function
+  map: Function
   length: number
   callback?: () => void
   data?: PostsInterface[]
@@ -24,6 +29,7 @@ export const initialState: StateInterface = {
   data: [],
   length: 1,
   filter: Function,
+  map: Function,
   // [Symbol.iterator]: function*() {
   //   const properties = Object.keys(this)
   //   for (const i of properties) {
@@ -46,6 +52,14 @@ const blogReducer = (
   action: ActionType
 ): StateInterface => {
   switch (action.type) {
+    case 'editBlogPost':
+      return state.map((blogPost: PostsInterface) => {
+        console.log('blog post')
+        console.log(blogPost)
+        console.log('blog post payload')
+        console.log(action.payload)
+        return blogPost.id === action.payload.id ? action.payload : blogPost
+      })
     case 'deleteBlogPost':
       return state.filter(
         (blogPost: PostsInterface) => blogPost.id !== action.payload
@@ -66,7 +80,9 @@ const blogReducer = (
 const addBlogPost = (dispatch: React.Dispatch<any>) => {
   return (title: string, content: string, callback: Function) => {
     dispatch({ type: 'addBlogPost', payload: { title, content } })
-    callback()
+    if (callback) {
+      callback()
+    }
   }
 }
 const deleteBlogPost = (dispatch: React.Dispatch<any>) => {
@@ -75,9 +91,23 @@ const deleteBlogPost = (dispatch: React.Dispatch<any>) => {
   }
 }
 
+const editBlogPost = (dispatch: React.Dispatch<any>) => {
+  return (id: number, title: string, content: string, callback: Function) => {
+    console.log('dispatch')
+    console.log(id, title, content)
+    dispatch({
+      type: 'editBlogPost',
+      payload: { id, title, content },
+    })
+    if (callback) {
+      callback()
+    }
+  }
+}
+
 export const { Context, Provider } = createDataContext(
   blogReducer,
-  { addBlogPost, deleteBlogPost },
+  { addBlogPost, deleteBlogPost, editBlogPost },
   []
 )
 

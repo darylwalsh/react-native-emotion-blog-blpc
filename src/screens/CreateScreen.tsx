@@ -1,5 +1,5 @@
-import React, { FC, useContext, useState } from 'react'
-import { Button, StyleSheet, Text, TextInput, View } from 'react-native'
+import React, { useContext } from 'react'
+import { StyleSheet } from 'react-native'
 import {
   NavigationParams,
   NavigationScreenComponent,
@@ -8,66 +8,38 @@ import {
 } from 'react-navigation'
 
 import { Context } from '../context/BlogContext'
-
-export interface PostsInterface {
-  id: number
-  title: string
-  length: number
-  onPress: (text: string) => void
-}
+import BlogPostForm from '../components/BlogPostForm'
+// export interface PostsInterface {
+//   id: number
+//   title: string
+//   length: number
+//   onSubmit: any
+// }
 interface Props {
   navigation: NavigationScreenProp<NavigationState, NavigationParams>
-  onPress: (text: string) => void
+  // onPress: (text: string) => void
+  //onSubmit: (text: string) => Function
 }
 
+// function handleOnSubmit(addBlogPost: (title:string) => void) {
+//   addBlogPost()
+// }
 const CreateScreen: NavigationScreenComponent<Props> = ({ navigation }) => {
-  const [title, setTitle] = useState('')
-  const [content, setContent] = useState('')
   const { addBlogPost } = useContext(Context)
+
+  return (
+    <BlogPostForm
+      onSubmit={(title: string, content: string): string => {
+        return addBlogPost(title, content, () => navigation.navigate('Index'))
+        // return title
+      }}
+    />
+  )
   // const blogPost = state.find(
   //   (blogPost: PostsInterface) => blogPost.id === navigation.getParam('id')
   // )
-
-  return (
-    <View>
-      <Text style={styles.label}>Enter Title:</Text>
-      <TextInput
-        style={styles.input}
-        value={title}
-        onChangeText={text => setTitle(text)}
-      />
-      <Text style={styles.label}>Enter Content:</Text>
-      <TextInput
-        style={styles.input}
-        value={content}
-        onChangeText={text => setContent(text)}
-      />
-      <Button
-        title="Add Blog Post"
-        onPress={() => {
-          addBlogPost(title, content, () => {
-            navigation.navigate('Index')
-          })
-        }}
-      />
-    </View>
-  )
 }
 
-const styles = StyleSheet.create({
-  input: {
-    fontSize: 18,
-    borderWidth: 1,
-    borderColor: 'black',
-    marginBottom: 15,
-    padding: 5,
-    margin: 5,
-  },
-  label: {
-    fontSize: 20,
-    marginBottom: 10,
-    marginLeft: 5,
-  },
-})
+const styles = StyleSheet.create({})
 
 export default CreateScreen
